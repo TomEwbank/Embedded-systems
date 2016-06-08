@@ -1,0 +1,659 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F24K50 ]
+[d frameptr 4065 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"43 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\Timers\t1open.c
+[v _OpenTimer1 OpenTimer1 `(v  1 e 1 0 ]
+"14 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\u1puts.c
+[v _puts1USART puts1USART `(v  1 e 1 0 ]
+"14 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\u1write.c
+[v _Write1USART Write1USART `(v  1 e 1 0 ]
+"4 D:\Unif\1er_master\embedded systems\project\pong2.X\custom_timer.c
+[v _initTMR0 initTMR0 `(v  1 e 1 0 ]
+"12
+[v _startTMR0For1kHz startTMR0For1kHz `T(v  1 e 1 0 ]
+[v i2_startTMR0For1kHz startTMR0For1kHz `T(v  1 e 1 0 ]
+"65 D:\Unif\1er_master\embedded systems\project\pong2.X\main.c
+[v _initADCON initADCON `(v  1 s 1 initADCON ]
+"88
+[v _initLedPorts initLedPorts `(v  1 s 1 initLedPorts ]
+"98
+[v _initOscillator initOscillator `(v  1 s 1 initOscillator ]
+"106
+[v _startADC startADC `T(v  1 s 1 startADC ]
+"110
+[v _initPWM initPWM `(v  1 s 1 initPWM ]
+"121
+[v _startPWM startPWM `(v  1 s 1 startPWM ]
+"127
+[v _stopPWM stopPWM `(v  1 s 1 stopPWM ]
+"134
+[v _initTMR1 initTMR1 `(v  1 s 1 initTMR1 ]
+"150
+[v _startTimer1 startTimer1 `(v  1 s 1 startTimer1 ]
+"155
+[v _stopTimer1 stopTimer1 `(v  1 s 1 stopTimer1 ]
+"164
+[v _interrupt_service_routine interrupt_service_routine `II(v  1 e 1 0 ]
+"231
+[v _main main `(v  1 e 1 0 ]
+"16 D:\Unif\1er_master\embedded systems\project\pong2.X\protocol.c
+[v _is_reserved is_reserved `T(uc  1 s 1 is_reserved ]
+"20
+[v _putc_when_ready putc_when_ready `T(v  1 s 1 putc_when_ready ]
+"25
+[v _send_coord send_coord `(v  1 e 1 0 ]
+"50
+[v _initUART initUART `(v  1 e 1 0 ]
+[s S150 . 1 `uc 1 ANSB0 1 0 :1:0 
+`uc 1 ANSB1 1 0 :1:1 
+`uc 1 ANSB2 1 0 :1:2 
+`uc 1 ANSB3 1 0 :1:3 
+`uc 1 ANSB4 1 0 :1:4 
+`uc 1 ANSB5 1 0 :1:5 
+]
+"284 C:/Program Files (x86)/Microchip/xc8/v1.36/include\pic18f24k50.h
+[u S157 . 1 `S150 1 . 1 0 ]
+[v _ANSELBbits ANSELBbits `VES157  1 e 1 @3932 ]
+"3308
+[v _PORTC PORTC `VEuc  1 e 1 @3970 ]
+[s S392 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"3768
+[s S401 . 1 `uc 1 LA0 1 0 :1:0 
+]
+[s S403 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+]
+[s S406 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 LA2 1 0 :1:2 
+]
+[s S409 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 LA3 1 0 :1:3 
+]
+[s S412 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 LA4 1 0 :1:4 
+]
+[s S415 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 LA5 1 0 :1:5 
+]
+[s S418 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 LA6 1 0 :1:6 
+]
+[s S421 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S424 . 1 `S392 1 . 1 0 `S401 1 . 1 0 `S403 1 . 1 0 `S406 1 . 1 0 `S409 1 . 1 0 `S412 1 . 1 0 `S415 1 . 1 0 `S418 1 . 1 0 `S421 1 . 1 0 ]
+[v _LATAbits LATAbits `VES424  1 e 1 @3977 ]
+"4416
+[v _CCPR2L CCPR2L `VEuc  1 e 1 @3984 ]
+[s S352 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"4486
+[s S361 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+[u S370 . 1 `S352 1 . 1 0 `S361 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES370  1 e 1 @3986 ]
+[s S167 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"4707
+[s S176 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+[u S185 . 1 `S167 1 . 1 0 `S176 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES185  1 e 1 @3987 ]
+"5073
+[v _CCP2CON CCP2CON `VEuc  1 e 1 @3991 ]
+[s S309 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 ACTIE 1 0 :1:7 
+]
+"5700
+[s S318 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSP1IE 1 0 :1:3 
+`uc 1 TX1IE 1 0 :1:4 
+`uc 1 RC1IE 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 STIE 1 0 :1:7 
+]
+[s S325 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 PSPIE 1 0 :1:7 
+]
+[u S328 . 1 `S309 1 . 1 0 `S318 1 . 1 0 `S325 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES328  1 e 1 @3997 ]
+[s S266 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 ACTIF 1 0 :1:7 
+]
+"5798
+[s S275 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 STIF 1 0 :1:7 
+]
+[s S282 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 PSPIF 1 0 :1:7 
+]
+[u S285 . 1 `S266 1 . 1 0 `S275 1 . 1 0 `S282 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES285  1 e 1 @3998 ]
+[s S667 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"6797
+[s S676 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX8_9 1 0 :1:6 
+]
+[s S679 . 1 `uc 1 TXD8 1 0 :1:0 
+]
+[s S681 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 BRGH1 1 0 :1:2 
+]
+[s S684 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 CSRC1 1 0 :1:7 
+]
+[s S687 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SENDB1 1 0 :1:3 
+]
+[s S690 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 SYNC1 1 0 :1:4 
+]
+[s S693 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 TRMT1 1 0 :1:1 
+]
+[s S696 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 TX91 1 0 :1:6 
+]
+[s S699 . 1 `uc 1 TX9D1 1 0 :1:0 
+]
+[s S701 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 TXEN1 1 0 :1:5 
+]
+[u S704 . 1 `S667 1 . 1 0 `S676 1 . 1 0 `S679 1 . 1 0 `S681 1 . 1 0 `S684 1 . 1 0 `S687 1 . 1 0 `S690 1 . 1 0 `S693 1 . 1 0 `S696 1 . 1 0 `S699 1 . 1 0 `S701 1 . 1 0 ]
+[v _TXSTA1bits TXSTA1bits `VES704  1 e 1 @4012 ]
+"7113
+[v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
+"8896
+[v _PR2 PR2 `VEuc  1 e 1 @4027 ]
+[s S238 . 1 `uc 1 ADCS 1 0 :3:0 
+`uc 1 ACQT 1 0 :3:3 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"9190
+[s S243 . 1 `uc 1 ADCS0 1 0 :1:0 
+`uc 1 ADCS1 1 0 :1:1 
+`uc 1 ADCS2 1 0 :1:2 
+`uc 1 ACQT0 1 0 :1:3 
+`uc 1 ACQT1 1 0 :1:4 
+`uc 1 ACQT2 1 0 :1:5 
+]
+[u S250 . 1 `S238 1 . 1 0 `S243 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES250  1 e 1 @4032 ]
+[s S207 . 1 `uc 1 NVCFG 1 0 :2:0 
+`uc 1 PVCFG 1 0 :2:2 
+`uc 1 . 1 0 :3:4 
+`uc 1 TRIGSEL 1 0 :1:7 
+]
+"9262
+[s S212 . 1 `uc 1 NVCFG0 1 0 :1:0 
+`uc 1 NVCFG1 1 0 :1:1 
+`uc 1 PVCFG0 1 0 :1:2 
+`uc 1 PVCFG1 1 0 :1:3 
+]
+[s S217 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CHSN3 1 0 :1:3 
+]
+[u S220 . 1 `S207 1 . 1 0 `S212 1 . 1 0 `S217 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES220  1 e 1 @4033 ]
+[s S90 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"9346
+[s S93 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :5:2 
+]
+[s S97 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S100 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+]
+[s S103 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S106 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S109 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[s S112 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S115 . 1 `S90 1 . 1 0 `S93 1 . 1 0 `S97 1 . 1 0 `S100 1 . 1 0 `S103 1 . 1 0 `S106 1 . 1 0 `S109 1 . 1 0 `S112 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES115  1 e 1 @4034 ]
+"9400
+[v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
+"9406
+[v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+"11894
+[v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
+"11913
+[v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+[s S467 . 1 `uc 1 SCS 1 0 :2:0 
+`uc 1 HFIOFS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+`uc 1 IDLEN 1 0 :1:7 
+]
+"12175
+[s S473 . 1 `uc 1 SCS0 1 0 :1:0 
+`uc 1 SCS1 1 0 :1:1 
+`uc 1 FLTS 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S481 . 1 `S467 1 . 1 0 `S473 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES481  1 e 1 @4051 ]
+"12309
+[v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
+"12328
+[v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
+[s S27 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"13027
+[s S36 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S45 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S49 . 1 `S27 1 . 1 0 `S36 1 . 1 0 `S45 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES49  1 e 1 @4082 ]
+"13498
+[v _ADIE ADIE `VEb  1 e 0 @31982 ]
+"13500
+[v _ADIF ADIF `VEb  1 e 0 @31990 ]
+"13624
+[v _BRGH BRGH `VEb  1 e 0 @32098 ]
+"13798
+[v _CREN CREN `VEb  1 e 0 @32092 ]
+"14210
+[v _GIEH GIEH `VEb  1 e 0 @32663 ]
+"14422
+[v _LATC6 LATC6 `VEb  1 e 0 @31838 ]
+"14424
+[v _LATC7 LATC7 `VEb  1 e 0 @31839 ]
+"14588
+[v _PEIE PEIE `VEb  1 e 0 @32662 ]
+"14626
+[v _PSA PSA `VEb  1 e 0 @32427 ]
+"14798
+[v _SPEN SPEN `VEb  1 e 0 @32095 ]
+"14974
+[v _SYNC SYNC `VEb  1 e 0 @32100 ]
+"14978
+[v _T08BIT T08BIT `VEb  1 e 0 @32430 ]
+"14982
+[v _T0CS T0CS `VEb  1 e 0 @32429 ]
+"14996
+[v _T0SE T0SE `VEb  1 e 0 @32428 ]
+"15040
+[v _T2CKPS0 T2CKPS0 `VEb  1 e 0 @32208 ]
+"15042
+[v _T2CKPS1 T2CKPS1 `VEb  1 e 0 @32209 ]
+"15096
+[v _TMR0ON TMR0ON `VEb  1 e 0 @32431 ]
+"15118
+[v _TMR1ON TMR1ON `VEb  1 e 0 @32360 ]
+"15128
+[v _TMR2ON TMR2ON `VEb  1 e 0 @32210 ]
+"15192
+[v _TRISC1 TRISC1 `VEb  1 e 0 @31905 ]
+"15200
+[v _TRISC6 TRISC6 `VEb  1 e 0 @31910 ]
+"15202
+[v _TRISC7 TRISC7 `VEb  1 e 0 @31911 ]
+"15258
+[v _TXEN TXEN `VEb  1 e 0 @32101 ]
+[s S873 . 1 `uc 1 TMR1GIE 1 0 :1:0 
+`uc 1 TMR3GIE 1 0 :1:1 
+`uc 1 USBIE 1 0 :1:2 
+`uc 1 CTMUIE 1 0 :1:3 
+]
+"6522 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f24k50.h
+[s S878 . 1 `uc 1 RXB0IE 1 0 :1:0 
+]
+[s S880 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RXB1IE 1 0 :1:1 
+]
+[s S883 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RXBNIE 1 0 :1:1 
+]
+[s S886 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TXB0IE 1 0 :1:2 
+]
+[s S889 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 TXB1IE 1 0 :1:3 
+]
+[u S892 . 1 `S873 1 . 1 0 `S878 1 . 1 0 `S880 1 . 1 0 `S883 1 . 1 0 `S886 1 . 1 0 `S889 1 . 1 0 ]
+[v _PIE3bits PIE3bits `VES892  1 e 1 @4003 ]
+[s S853 . 1 `uc 1 TMR1GIF 1 0 :1:0 
+`uc 1 TMR3GIF 1 0 :1:1 
+`uc 1 USBIF 1 0 :1:2 
+`uc 1 CTMUIF 1 0 :1:3 
+]
+"6588
+[s S858 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RXBNIF 1 0 :1:1 
+]
+[u S861 . 1 `S853 1 . 1 0 `S858 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES861  1 e 1 @4004 ]
+"7265
+[v _TXREG1 TXREG1 `VEuc  1 e 1 @4013 ]
+"11868
+[v _T1GCON T1GCON `VEuc  1 e 1 @4044 ]
+[s S919 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1GGO_NOT_T1DONE 1 0 :1:3 
+]
+"11914
+[s S922 . 1 `uc 1 T1GSS 1 0 :2:0 
+`uc 1 T1GVAL 1 0 :1:2 
+`uc 1 T1GGO_nT1DONE 1 0 :1:3 
+`uc 1 T1GSPM 1 0 :1:4 
+`uc 1 T1GTM 1 0 :1:5 
+`uc 1 T1GPOL 1 0 :1:6 
+`uc 1 TMR1GE 1 0 :1:7 
+]
+[s S930 . 1 `uc 1 T1GSS0 1 0 :1:0 
+`uc 1 T1GSS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T1GGO 1 0 :1:3 
+]
+[s S935 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_T1DONE 1 0 :1:3 
+]
+[s S938 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 nT1DONE 1 0 :1:3 
+]
+[s S941 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1DONE 1 0 :1:3 
+]
+[s S944 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1GGO_NOT_DONE 1 0 :1:3 
+]
+[s S947 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1GGO_nDONE 1 0 :1:3 
+]
+[u S950 . 1 `S919 1 . 1 0 `S922 1 . 1 0 `S930 1 . 1 0 `S935 1 . 1 0 `S938 1 . 1 0 `S941 1 . 1 0 `S944 1 . 1 0 `S947 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES950  1 e 1 @4044 ]
+"11998
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S991 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+]
+"12031
+[s S994 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 RD16 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 SOSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+[s S1001 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 T1RD16 1 0 :1:1 
+`uc 1 T1SYNC 1 0 :1:2 
+`uc 1 T1SOSCEN 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+[s S1010 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1OSCEN 1 0 :1:3 
+]
+[u S1013 . 1 `S991 1 . 1 0 `S994 1 . 1 0 `S1001 1 . 1 0 `S1010 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES1013  1 e 1 @4045 ]
+[s S1172 . 1 `uc 1 RX_NINE 1 0 :1:0 
+`uc 1 TX_NINE 1 0 :1:1 
+`uc 1 FRAME_ERROR 1 0 :1:2 
+`uc 1 OVERRUN_ERROR 1 0 :1:3 
+`uc 1 fill 1 0 :4:4 
+]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\u1defs.c
+[u S1178 USART1 1 `uc 1 val 1 0 `S1172 1 . 1 0 ]
+[v _USART1_Status USART1_Status `S1178  1 e 1 0 ]
+"38 D:\Unif\1er_master\embedded systems\project\pong2.X\main.c
+[v _mode mode `VEuc  1 e 1 0 ]
+"39
+[v _counter counter `VEi  1 e 2 0 ]
+"41
+[v _send_ping send_ping `VEuc  1 e 1 0 ]
+"42
+[v _ping_send ping_send `VEuc  1 e 1 0 ]
+"43
+[v _blocking_sensors blocking_sensors `VEuc  1 e 1 0 ]
+"44
+[v _listening listening `VEuc  1 e 1 0 ]
+"46
+[v _tmr0_counter tmr0_counter `VEi  1 e 2 0 ]
+"48
+[v _RTT_received RTT_received `VEuc  1 e 1 0 ]
+"49
+[v _no_RTT_counter no_RTT_counter `VEuc  1 e 1 0 ]
+"50
+[v _notSentToUART notSentToUART `VEuc  1 e 1 0 ]
+"52
+[v _sensor1_RTT_low sensor1_RTT_low `VEuc  1 e 1 0 ]
+"53
+[v _sensor1_RTT_high sensor1_RTT_high `VEuc  1 e 1 0 ]
+"231
+[v _main main `(v  1 e 1 0 ]
+{
+"240
+[v main@fetched_sensor1_RTT fetched_sensor1_RTT `i  1 a 2 29 ]
+"246
+[v main@readyForUART readyForUART `uc  1 a 1 28 ]
+"273
+} 0
+"12 D:\Unif\1er_master\embedded systems\project\pong2.X\custom_timer.c
+[v _startTMR0For1kHz startTMR0For1kHz `T(v  1 e 1 0 ]
+{
+"18
+} 0
+"25 D:\Unif\1er_master\embedded systems\project\pong2.X\protocol.c
+[v _send_coord send_coord `(v  1 e 1 0 ]
+{
+[v send_coord@x_cm x_cm `ui  1 p 2 22 ]
+[v send_coord@y_cm y_cm `ui  1 p 2 24 ]
+"31
+} 0
+"20
+[v _putc_when_ready putc_when_ready `T(v  1 s 1 putc_when_ready ]
+{
+[v putc_when_ready@c c `uc  1 a 1 wreg ]
+[v putc_when_ready@c c `uc  1 a 1 wreg ]
+[v putc_when_ready@c c `uc  1 a 1 21 ]
+"23
+} 0
+"14 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\USART\u1write.c
+[v _Write1USART Write1USART `(v  1 e 1 0 ]
+{
+[v Write1USART@data data `uc  1 a 1 wreg ]
+[v Write1USART@data data `uc  1 a 1 wreg ]
+"16
+[v Write1USART@data data `uc  1 a 1 20 ]
+"24
+} 0
+"50 D:\Unif\1er_master\embedded systems\project\pong2.X\protocol.c
+[v _initUART initUART `(v  1 e 1 0 ]
+{
+"61
+} 0
+"134 D:\Unif\1er_master\embedded systems\project\pong2.X\main.c
+[v _initTMR1 initTMR1 `(v  1 s 1 initTMR1 ]
+{
+"147
+} 0
+"43 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\pic18\plib\Timers\t1open.c
+[v _OpenTimer1 OpenTimer1 `(v  1 e 1 0 ]
+{
+[v OpenTimer1@config config `uc  1 a 1 wreg ]
+[v OpenTimer1@config config `uc  1 a 1 wreg ]
+[v OpenTimer1@config1 config1 `uc  1 p 1 20 ]
+"45
+[v OpenTimer1@config config `uc  1 a 1 22 ]
+"93
+} 0
+"4 D:\Unif\1er_master\embedded systems\project\pong2.X\custom_timer.c
+[v _initTMR0 initTMR0 `(v  1 e 1 0 ]
+{
+"10
+} 0
+"110 D:\Unif\1er_master\embedded systems\project\pong2.X\main.c
+[v _initPWM initPWM `(v  1 s 1 initPWM ]
+{
+"118
+} 0
+"98
+[v _initOscillator initOscillator `(v  1 s 1 initOscillator ]
+{
+"104
+} 0
+"88
+[v _initLedPorts initLedPorts `(v  1 s 1 initLedPorts ]
+{
+"93
+} 0
+"65
+[v _initADCON initADCON `(v  1 s 1 initADCON ]
+{
+"83
+} 0
+"164
+[v _interrupt_service_routine interrupt_service_routine `II(v  1 e 1 0 ]
+{
+"214
+[v interrupt_service_routine@sensor1_val sensor1_val `i  1 a 2 18 ]
+"228
+} 0
+"12 D:\Unif\1er_master\embedded systems\project\pong2.X\custom_timer.c
+[v i2_startTMR0For1kHz startTMR0For1kHz `T(v  1 e 1 0 ]
+{
+"18
+} 0
+"155 D:\Unif\1er_master\embedded systems\project\pong2.X\main.c
+[v _stopTimer1 stopTimer1 `(v  1 s 1 stopTimer1 ]
+{
+"159
+} 0
+"127
+[v _stopPWM stopPWM `(v  1 s 1 stopPWM ]
+{
+"131
+} 0
+"150
+[v _startTimer1 startTimer1 `(v  1 s 1 startTimer1 ]
+{
+"152
+} 0
+"121
+[v _startPWM startPWM `(v  1 s 1 startPWM ]
+{
+"124
+} 0
+"106
+[v _startADC startADC `T(v  1 s 1 startADC ]
+{
+"108
+} 0
