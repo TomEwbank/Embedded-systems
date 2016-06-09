@@ -11,71 +11,21 @@
 //#include <xc.h>
 #include <p30f1010.h>
 
-#include <libpic30.h>
-#include <timer.h>
-#include <outcompare.h> //for PWM
-
 #pragma config FNOSC = FRC_PLL
 #pragma config FRANGE = FRC_HI_RANGE
 
 #define PING_RECEIVED_LOW 413
 #define PING_RECEIVED_HIGH 571
-#define PWM_PERIOD_PMR2 0x1FE
+#define TIMER_PERIOD 0x0064 /* Set the timer period for 3.43 usec*/
 
 
 volatile int i = 0;
 volatile int t = 300;
 volatile int received = 0;
 
-
-static void enableTimer2PWM() {
-    TMR2 = 0; // Clear count register
-    
-    PR2 = PWM_PERIOD_PMR2; // Period
-    
-    // Default config
-    T2CONbits.TSIDL = 0; // Continue timer when CPU idle
-    T2CONbits.TGATE = 0; // Timer gated time accumulation disabled
-    T2CONbits.T32 = 0; // 16-bit timer
-    T2CONbits.TCS = 0; // Internal clock
-    
-    // Prescale -> 1:1
-    T2CONbits.TCKPS = 0b00;
-    
-    // Activate
-    T2CONbits.TON = 1;
-}
-
-static void disableTimer2() {
-    T2CONbits.TON = 0;
-    CloseTimer2();
-}
-
-static void initPWM() {    
-    OC1RS = 0xFE; // PWM duty cycle -> Should be PR2/2 for 50%
-    OC1CONbits.OCTSEL = 0; //Use Timer 2 as clock source
-    OC1CONbits.OCM = 0b110; // PWM mode on OC1, Fault pin disabled
-}
-
-static void startPWM() {
-    // Enable the timer
-    enableTimer2PWM();
-}
-
-static void stopPWM() {
-    disableTimer2();
-}
-
-
-
-
-
 int main(void)
 {
     OSCTUN = 0b0111;
-    
-    initPWM();
-    startPWM();
     
     /* Set up the ADC Module */
     ADCONbits.ADSIDL = 0; /* Operate in Idle Mode*/

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>PWM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -145,7 +146,7 @@
       </C30-LD>
       <C30Global>
         <property key="common-include-directories"
-                  value="C:\Program Files (x86)\Microchip\xc16\v1.26\support\peripheral_30F_24H_33F;C:\Program Files (x86)\Microchip\xc16\v1.26\support\dsPIC30F\h"/>
+                  value="C:\Program Files (x86)\Microchip\xc16\v1.26\support\peripheral_30F_24H_33F;C:\Program Files (x86)\Microchip\xc16\v1.26\support\dsPIC30F\h;C:\Program Files (x86)\Microchip\xc16\v1.26\support\generic\h"/>
         <property key="dual-boot-partition" value="0"/>
         <property key="fast-math" value="false"/>
         <property key="generic-16-bit" value="false"/>

@@ -47,6 +47,8 @@ Command:
 
 Archive member included because of file (symbol)
 
+c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
+                              build/default/production/main.o (_CloseTimer2)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                               (__resetPRI)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
@@ -59,12 +61,12 @@ Program Memory  [Origin = 0x100, Length = 0xf00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100                0xac           0x102  (258)
-.text                        0x1ac                0xe6           0x159  (345)
-.dinit                       0x292                0x10            0x18  (24)
-.shared.dinit                0x2a2                 0x2             0x3  (3)
+.text                        0x100                0xb4           0x10e  (270)
+.text                        0x1b4               0x138           0x1d4  (468)
+.dinit                       0x2ec                0x10            0x18  (24)
+.shared.dinit                0x2fc                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x276  (630) 10%
+                 Total program memory used (bytes):          0x2fd  (765) 13%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0x7c]
@@ -111,23 +113,25 @@ External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x00012c                  __psv_init
-                  0x00013c                  __data_init
                   0x00013c                  __data_init_standard
+                  0x00013c                  __data_init
                   0x0001a8                  __DefaultInterrupt
-                  0x0001ac                  _main
-                  0x000204                  __T1Interrupt
-                  0x000234                  __ADCInterrupt
+                  0x0001ac                  _CloseTimer2
+                  0x000202                  _main
+                  0x00025e                  __T1Interrupt
+                  0x00028e                  __ADCInterrupt
 
 External Symbols in Program Memory (by name):
 
-                  0x000234                  __ADCInterrupt
+                  0x0001ac                  _CloseTimer2
+                  0x00028e                  __ADCInterrupt
                   0x0001a8                  __DefaultInterrupt
-                  0x000204                  __T1Interrupt
+                  0x00025e                  __T1Interrupt
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x00012c                  __psv_init
                   0x000100                  __resetPRI
-                  0x0001ac                  _main
+                  0x000202                  _main
 
 Memory Configuration
 
@@ -175,7 +179,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100         0xac
+.text             0x000100         0xb4
  *(.init)
  .init            0x000100         0x3c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000100                  __resetPRI
@@ -193,6 +197,8 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
  *(.libm)
  *(.libdsp)
  *(.lib*)
+ .libperi         0x0001ac          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
+                  0x0001ac                  _CloseTimer2
 
 usercode
  *(usercode)
@@ -224,26 +230,26 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xf29
+.debug_info       0x000000       0x122b
  *(.debug_info)
- .debug_info      0x000000        0xf29 build/default/production/main.o
+ .debug_info      0x000000       0x122b build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x139
+.debug_abbrev     0x000000        0x14a
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x139 build/default/production/main.o
+ .debug_abbrev    0x000000        0x14a build/default/production/main.o
 
-.debug_line       0x000000         0xc7
+.debug_line       0x000000         0xe2
  *(.debug_line)
- .debug_line      0x000000         0xc7 build/default/production/main.o
+ .debug_line      0x000000         0xe2 build/default/production/main.o
 
-.debug_frame      0x000000         0x84
+.debug_frame      0x000000        0x110
  *(.debug_frame)
- .debug_frame     0x000000         0x84 build/default/production/main.o
+ .debug_frame     0x000000        0x110 build/default/production/main.o
 
-.debug_str        0x000000         0x6c
+.debug_str        0x000000         0x81
  *(.debug_str)
- .debug_str       0x000000         0x6c build/default/production/main.o
+ .debug_str       0x000000         0x81 build/default/production/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -697,18 +703,20 @@ LOAD data_init
 LOAD shared_data_init
 
 .debug_pubtypes
-                  0x000018        0x146
+                  0x000018        0x186
  .debug_pubtypes
-                  0x000018        0x146 build/default/production/main.o
+                  0x000018        0x186 build/default/production/main.o
 
 __c30_signature
-                  0x00015e         0x12
+                  0x00019e         0x18
  __c30_signature
-                  0x00015e          0x6 build/default/production/main.o
+                  0x00019e          0x6 build/default/production/main.o
  __c30_signature
-                  0x000164          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x0001a4          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
  __c30_signature
-                  0x00016a          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x0001aa          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x0001b0          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
 .nbss               0x0800          0x4
  .nbss              0x0800          0x4 build/default/production/main.o
@@ -735,14 +743,14 @@ __c30_signature
  .ivt._ADCInterrupt
                   0x00002a          0x2 build/default/production/main.o
 
-.text             0x0001ac         0xe6
- .text            0x0001ac         0xe6 build/default/production/main.o
-                  0x0001ac                  _main
-                  0x000204                  __T1Interrupt
-                  0x000234                  __ADCInterrupt
+.text             0x0001b4        0x138
+ .text            0x0001b4        0x138 build/default/production/main.o
+                  0x000202                  _main
+                  0x00025e                  __T1Interrupt
+                  0x00028e                  __ADCInterrupt
 
-.dinit            0x000292         0x10
- .dinit           0x000292         0x10 data_init
+.dinit            0x0002ec         0x10
+ .dinit           0x0002ec         0x10 data_init
 
-.shared.dinit     0x0002a2          0x2
- .shared.dinit    0x0002a2          0x2 shared_data_init
+.shared.dinit     0x0002fc          0x2
+ .shared.dinit    0x0002fc          0x2 shared_data_init
