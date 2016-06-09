@@ -62,11 +62,11 @@ Program Memory  [Origin = 0x100, Length = 0xf00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100                0xb4           0x10e  (270)
-.text                        0x1b4               0x1d6           0x2c1  (705)
-.dinit                       0x38a                 0x8             0xc  (12)
-.shared.dinit                0x392                 0x2             0x3  (3)
+.text                        0x1b4               0x1ea           0x2df  (735)
+.dinit                       0x39e                 0x8             0xc  (12)
+.shared.dinit                0x3a6                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x3de  (990) 17%
+                 Total program memory used (bytes):          0x3fc  (1020) 17%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0x7c]
@@ -131,23 +131,25 @@ External Symbols in Program Memory (by address):
                   0x00013c                  __data_init_standard
                   0x0001a8                  __DefaultInterrupt
                   0x0001ac                  _CloseTimer2
-                  0x000218                  _main
-                  0x000276                  __T1Interrupt
-                  0x000306                  __T2Interrupt
-                  0x000320                  __ADCInterrupt
+                  0x000228                  _initADC
+                  0x000262                  _main
+                  0x000286                  __T1Interrupt
+                  0x00031a                  __T2Interrupt
+                  0x000334                  __ADCInterrupt
 
 External Symbols in Program Memory (by name):
 
                   0x0001ac                  _CloseTimer2
-                  0x000320                  __ADCInterrupt
+                  0x000334                  __ADCInterrupt
                   0x0001a8                  __DefaultInterrupt
-                  0x000276                  __T1Interrupt
-                  0x000306                  __T2Interrupt
+                  0x000286                  __T1Interrupt
+                  0x00031a                  __T2Interrupt
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x00012c                  __psv_init
                   0x000100                  __resetPRI
-                  0x000218                  _main
+                  0x000228                  _initADC
+                  0x000262                  _main
 
 Memory Configuration
 
@@ -246,22 +248,22 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1333
+.debug_info       0x000000       0x1361
  *(.debug_info)
- .debug_info      0x000000       0x1333 build/default/production/main.o
+ .debug_info      0x000000       0x1361 build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x139
+.debug_abbrev     0x000000        0x14c
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x139 build/default/production/main.o
+ .debug_abbrev    0x000000        0x14c build/default/production/main.o
 
-.debug_line       0x000000         0xfe
+.debug_line       0x000000        0x106
  *(.debug_line)
- .debug_line      0x000000         0xfe build/default/production/main.o
+ .debug_line      0x000000        0x106 build/default/production/main.o
 
-.debug_frame      0x000000        0x178
+.debug_frame      0x000000        0x1b0
  *(.debug_frame)
- .debug_frame     0x000000        0x178 build/default/production/main.o
+ .debug_frame     0x000000        0x1b0 build/default/production/main.o
 
 .debug_str        0x000000         0xe1
  *(.debug_str)
@@ -274,10 +276,10 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xea
+                  0x000000         0xf6
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xea build/default/production/main.o
+                  0x000000         0xf6 build/default/production/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -768,15 +770,16 @@ __c30_signature
  .ivt._ADCInterrupt
                   0x00002a          0x2 build/default/production/main.o
 
-.text             0x0001b4        0x1d6
- .text            0x0001b4        0x1d6 build/default/production/main.o
-                  0x000218                  _main
-                  0x000276                  __T1Interrupt
-                  0x000306                  __T2Interrupt
-                  0x000320                  __ADCInterrupt
+.text             0x0001b4        0x1ea
+ .text            0x0001b4        0x1ea build/default/production/main.o
+                  0x000228                  _initADC
+                  0x000262                  _main
+                  0x000286                  __T1Interrupt
+                  0x00031a                  __T2Interrupt
+                  0x000334                  __ADCInterrupt
 
-.dinit            0x00038a          0x8
- .dinit           0x00038a          0x8 data_init
+.dinit            0x00039e          0x8
+ .dinit           0x00039e          0x8 data_init
 
-.shared.dinit     0x000392          0x2
- .shared.dinit    0x000392          0x2 shared_data_init
+.shared.dinit     0x0003a6          0x2
+ .shared.dinit    0x0003a6          0x2 shared_data_init

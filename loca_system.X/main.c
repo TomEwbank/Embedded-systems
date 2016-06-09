@@ -45,6 +45,13 @@ volatile bool RTT1_received = false;
 volatile bool RTT2_received = false;
 
 
+static void initTimer1() {
+    /* Set up Timer1 */
+    T1CON = 0; /* Timer with 0 prescale*/
+    TMR1 = 0; /* Clear the Timer counter*/
+    PR1 = TIMER1_PERIOD; /* Load the period register*/
+    IEC0bits.T1IE = 1; // Enables timer1 interrupts
+}
 
 static void initTimer2() {
     // Default config
@@ -90,15 +97,7 @@ static void stopTimerRTT() {
 }
 
 
-
-
-int main(void)
-{
-    OSCTUN = 0b0111;
-    
-    initPWM();
-    initTimer2();
-    
+void initADC() {
     /* Set up the ADC Module */
     ADCONbits.ADSIDL = 0; /* Operate in Idle Mode*/
     ADCONbits.FORM = 0; /* Output in Integer Format*/
@@ -111,16 +110,25 @@ int main(void)
     ADCPC0bits.TRGSRC0 = 1; /* Trigger conversion on Timer 1 Period Match*/
     ADCPC0bits.IRQEN0 = 1; /* Enable the interrupt*/
     
-    /* Set up Timer1 */
-    T1CON = 0; /* Timer with 0 prescale*/
-    TMR1 = 0; /* Clear the Timer counter*/
-    PR1 = TIMER1_PERIOD; /* Load the period register*/
-    IEC0bits.T1IE = 1; // Enables timer1 interrupts
-    
     /* Set up the Interrupts */
     IFS0bits.ADIF = 0; /* Clear AD Interrupt Flag*/
     IPC2bits.ADIP = 4; /* Set ADC Interrupt Priority*/
     IEC0bits.ADIE = 1; /* Enable the ADC Interrupt*/
+}
+
+int main(void)
+{
+    OSCTUN = 0b0111;
+    
+    initPWM();
+    initTimer2();
+    initADC();
+    initTimer1();
+    
+    
+    
+    
+    
     
     /* Set up led outputs */
     ADPCFGbits.PCFG2 = 1;
@@ -168,6 +176,7 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
             stopTimerRTT();
             timer2_counter = 0;
             
+            IEC0bits.ADIE = 0;
             IFS0bits.ADIF = 0; 
             ADSTATbits.P0RDY= 0;
                
@@ -197,6 +206,7 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
         listening = true;
         
         /* Launch ADC */
+        IEC0bits.ADIE = 1;
         ADCPC0bits.SWTRG0 = 1;
      
     } else {
