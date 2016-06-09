@@ -1,10 +1,10 @@
 /*
- *  LOCALIZATION SYSTEM
+ *  PING-PONG SYSTEM
  * 
  * File:   main.c
  * Author: tom
  *
- * Created on 8 juin 2016, 17:06
+ * Created on 9 juin 2016, 16:47
  */
 
 
@@ -22,28 +22,19 @@
 #define PING_RECEIVED_LOW 413
 #define PING_RECEIVED_HIGH 571
 #define PWM_PERIOD 0x1FE
-#define RTT_PERIOD 0xFFFF
 #define TIMER1_PERIOD 20000 // 1ms timer
 
+#define MODE_RECV 1 
+#define MODE_WAITING_BEFORE_SEND 2
+#define MODE_SENDING 3
+#define MODE_WAITING_AFTER_SEND 4
 
-//volatile int i = 0;
-//volatile int t = 300;
-//volatile int received = 0;
+#define MODE_WAIT1_DURATION 15
+#define MODE_SEND_DURATION 16
+#define MODE_WAIT2_DURATION 31
 
-volatile bool send_ping = false;
-volatile bool ping_send = false;
-volatile bool blocking_sensors = false;
-volatile bool listening = false;
-
+volatile char mode = MODE_RECV;
 volatile int timer1_counter = 0;
-volatile int timer2_counter = 0;
-
-volatile int RTT1 = 0;
-volatile int RTT2 = 0;
-
-volatile bool RTT1_received = false;
-volatile bool RTT2_received = false;
-
 
 static void initTimer1() {
     /* Set up Timer1 */
@@ -51,6 +42,12 @@ static void initTimer1() {
     TMR1 = 0; /* Clear the Timer counter*/
     PR1 = TIMER1_PERIOD; /* Load the period register*/
     IEC0bits.T1IE = 1; // Enables timer1 interrupts
+}
+
+static void startTimer1() {
+    TMR1 = 0; /* Clear the Timer counter*/
+    IEC0bits.T1IE = 1; // Enables timer1 interrupts
+    T1CONbits.TON = 1;
 }
 
 static void initTimer2() {
@@ -82,20 +79,6 @@ static void stopPWM() {
     CloseTimer2();
     OC1CONbits.OCM = 0; // PWM output disabled
 }
-
-static void startTimerRTT() {
-    TMR2 = 0; // Clear count register
-    PR2 = RTT_PERIOD; // Period
-    
-    // Activate
-    IEC0bits.T2IE = 1; // Enables timer1 interrupts
-    T2CONbits.TON = 1;
-}
-
-static void stopTimerRTT() {
-    CloseTimer2();
-}
-
 
 void initADC() {
     /* Set up the ADC Module */
@@ -136,21 +119,18 @@ int main(void)
     initADC();
     initTimer1(); 
     initLedOutputs();
-    
-    
-    /* starting state */
-    send_ping = true;
-    
-    
+      
     /* Enable ADC */
     ADCONbits.ADON = 1; /* Start the ADC module*/
     
     /* Enable Timer 1 */
     T1CONbits.TON = 1;  
+    
+    IEC0bits.ADIE = 1;
+    ADCPC0bits.SWTRG0 = 1;
 
     while(1) {
-        LATBbits.LATB2 = RTT1_received;
-        LATBbits.LATB3 = RTT2_received;
+        
     }
 }
 
@@ -158,64 +138,32 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
 
     IFS0bits.T1IF = 0;
       
-    if (listening) {
-        
-        if (timer1_counter == 30) {
-            timer1_counter = 0;
-            listening = false;
-            send_ping = true;
-            
-            RTT1_received = false;
-            RTT2_received = false;
-            
-            stopTimerRTT();
-            timer2_counter = 0;
-            
-            IEC0bits.ADIE = 0;
-            IFS0bits.ADIF = 0; 
-            ADSTATbits.P0RDY= 0;
-               
-        } else {
-            ++timer1_counter;
-        }
-        
-    } else if (ping_send) { 
-        
-        stopPWM();
-        startTimerRTT();
-        ping_send = false;
-        blocking_sensors = true;
-        
-        
-    } else if (send_ping) {
-        
-        initPWM();
-        startPWM(); // Sent for 1ms
-        send_ping = false;
-        ping_send = true;
-        
-    } else if (blocking_sensors && timer1_counter == 15) { // Blocked during 15ms
-        
-        timer1_counter = 0;
-        blocking_sensors = false;
-        listening = true;
-        
-        /* Launch ADC */
-        IEC0bits.ADIE = 1;
-        ADCPC0bits.SWTRG0 = 1;
-     
-    } else {
-        ++timer1_counter;
+    switch(mode) {
+        case MODE_WAITING_BEFORE_SEND:
+            if (timer1_counter >= MODE_WAIT1_DURATION) {
+                LATBbits.LATB3 = !LATBbits.LATB3;
+                mode = MODE_SENDING;
+                startPWM();
+            }
+            break;
+        case MODE_SENDING: 
+            if (timer1_counter >= MODE_SEND_DURATION) {
+                stopPWM();
+                mode = MODE_WAITING_AFTER_SEND;
+            }
+            break;
+        case MODE_WAITING_AFTER_SEND:
+            if (timer1_counter >= MODE_WAIT2_DURATION) {
+                CloseTimer1();
+                mode = MODE_RECV;
+
+                ADCPC0bits.SWTRG0 = 1;
+            }
     }
+    
+    timer1_counter++;
 
     
-//    LATBbits.LATB2 = !LATBbits.LATB2;
-    
-}
-
-void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void) {
-    IFS0bits.T2IF = 0;   
-    ++timer2_counter;
     
 }
 
@@ -223,33 +171,29 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 {
  
     /* AD Conversion complete interrupt handler */
-    int sensor1_val, sensor2_val;
+    int sensor1_val;
     
     IFS0bits.ADIF = 0; /* Clear ADC Interrupt Flag*/
     
     sensor1_val = ADCBUF0; /* Get the conversion result*/
-    sensor2_val = ADCBUF1;
     
-    ADCPC0bits.SWTRG0 = 1;
     
-//    LATBbits.LATB2 = !LATBbits.LATB2;
+    
+    LATBbits.LATB2 = !LATBbits.LATB2;
     
     if (sensor1_val < PING_RECEIVED_LOW || sensor1_val > PING_RECEIVED_HIGH) {
-//        LATBbits.LATB2 = 1;
-        RTT1_received = true;
+
+        mode = MODE_WAITING_BEFORE_SEND;
+        timer1_counter = 0;
+        startTimer1();
+        LATBbits.LATB3 = !LATBbits.LATB3;
     } 
-//    else {
-//        LATBbits.LATB2 = 0;
-//    }
-    if (sensor2_val < PING_RECEIVED_LOW || sensor2_val > PING_RECEIVED_HIGH) {
-//        LATBbits.LATB3 = 1;
-        RTT2_received = true;
-    } 
-//    else {
-//        LATBbits.LATB3 = 0;       
-//    }
-    
+    else {
+        /* Keep sampling */
+        ADCPC0bits.SWTRG0 = 1;
+    }
     
     ADSTATbits.P0RDY= 0; /* Clear the ADSTAT bits*/
     
 }
+

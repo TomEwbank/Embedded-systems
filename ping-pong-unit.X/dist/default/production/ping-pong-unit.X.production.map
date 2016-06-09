@@ -6,7 +6,7 @@ Tool Name:
 Command:
   -p30F1010 \
   -o \
-  dist/default/production/loca_system.X.production.elf \
+  dist/default/production/ping-pong-unit.X.production.elf \
   -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/.. \
   -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib \
   -Lc:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/PIC24E \
@@ -35,7 +35,7 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/loca_system.X.production.map \
+  -Map=dist/default/production/ping-pong-unit.X.production.map \
   --report-mem \
   --memorysummary \
   dist/default/production/memoryfile.xml \
@@ -47,6 +47,8 @@ Command:
 
 Archive member included because of file (symbol)
 
+c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer1.o)
+                              build/default/production/main.o (_CloseTimer1)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
                               build/default/production/main.o (_CloseTimer2)
 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
@@ -61,12 +63,12 @@ Program Memory  [Origin = 0x100, Length = 0xf00]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100                0xb4           0x10e  (270)
-.text                        0x1b4               0x1f4           0x2ee  (750)
-.dinit                       0x3a8                 0x8             0xc  (12)
-.shared.dinit                0x3b0                 0x2             0x3  (3)
+.text                        0x100                0xbc           0x11a  (282)
+.text                        0x1bc               0x1da           0x2c7  (711)
+.dinit                       0x396                0x10            0x18  (24)
+.shared.dinit                0x3a6                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x40b  (1035) 17%
+                 Total program memory used (bytes):          0x3fc  (1020) 17%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0x7c]
@@ -74,7 +76,6 @@ Ivt Memory  [Origin = 0x4, Length = 0x7c]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .ivt._T1Interrupt             0x1a                 0x2             0x3  (3)
-.ivt._T2Interrupt             0x20                 0x2             0x3  (3)
 .ivt._ADCInterrupt            0x2a                 0x2             0x3  (3)
 
 
@@ -82,9 +83,10 @@ Data Memory  [Origin = 0x800, Length = 0x100]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0xe  (14)
+.ndata                       0x800                   0             0x2  (2)
+.nbss                        0x802                   0             0x2  (2)
 
-                 Total data memory used (bytes):            0xe  (14) 5%
+                 Total data memory used (bytes):            0x4  (4) 1%
 
 
 Dynamic Memory Usage
@@ -92,36 +94,20 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x80e                                0xf2  (242)
+stack                        0x804                                0xfc  (252)
 
-                 Maximum dynamic memory (bytes):           0xf2  (242)
+                 Maximum dynamic memory (bytes):           0xfc  (252)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _send_ping
-                    0x0801                  _ping_send
-                    0x0802                  _blocking_sensors
-                    0x0803                  _listening
-                    0x0804                  _timer1_counter
-                    0x0806                  _timer2_counter
-                    0x0808                  _RTT1
-                    0x080a                  _RTT2
-                    0x080c                  _RTT1_received
-                    0x080d                  _RTT2_received
+                    0x0800                  _mode
+                    0x0802                  _timer1_counter
 
 External Symbols in Data Memory (by name):
 
-                    0x0808                  _RTT1
-                    0x080c                  _RTT1_received
-                    0x080a                  _RTT2
-                    0x080d                  _RTT2_received
-                    0x0802                  _blocking_sensors
-                    0x0803                  _listening
-                    0x0801                  _ping_send
-                    0x0800                  _send_ping
-                    0x0804                  _timer1_counter
-                    0x0806                  _timer2_counter
+                    0x0800                  _mode
+                    0x0802                  _timer1_counter
 
 External Symbols in Program Memory (by address):
 
@@ -130,26 +116,26 @@ External Symbols in Program Memory (by address):
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x0001a8                  __DefaultInterrupt
-                  0x0001ac                  _CloseTimer2
-                  0x000228                  _initADC
-                  0x000274                  _main
-                  0x0002b2                  __T1Interrupt
-                  0x000346                  __T2Interrupt
-                  0x000360                  __ADCInterrupt
+                  0x0001ac                  _CloseTimer1
+                  0x0001b4                  _CloseTimer2
+                  0x000224                  _initADC
+                  0x000270                  _main
+                  0x00028a                  __T1Interrupt
+                  0x000314                  __ADCInterrupt
 
 External Symbols in Program Memory (by name):
 
-                  0x0001ac                  _CloseTimer2
-                  0x000360                  __ADCInterrupt
+                  0x0001ac                  _CloseTimer1
+                  0x0001b4                  _CloseTimer2
+                  0x000314                  __ADCInterrupt
                   0x0001a8                  __DefaultInterrupt
-                  0x0002b2                  __T1Interrupt
-                  0x000346                  __T2Interrupt
+                  0x00028a                  __T1Interrupt
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x00012c                  __psv_init
                   0x000100                  __resetPRI
-                  0x000228                  _initADC
-                  0x000274                  _main
+                  0x000224                  _initADC
+                  0x000270                  _main
 
 Memory Configuration
 
@@ -197,7 +183,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100         0xb4
+.text             0x000100         0xbc
  *(.init)
  .init            0x000100         0x3c c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000100                  __resetPRI
@@ -215,8 +201,10 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libfx-elf.a
  *(.libm)
  *(.libdsp)
  *(.lib*)
- .libperi         0x0001ac          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
-                  0x0001ac                  _CloseTimer2
+ .libperi         0x0001ac          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer1.o)
+                  0x0001ac                  _CloseTimer1
+ .libperi         0x0001b4          0x8 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
+                  0x0001b4                  _CloseTimer2
 
 usercode
  *(usercode)
@@ -248,26 +236,26 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x137d
+.debug_info       0x000000       0x122f
  *(.debug_info)
- .debug_info      0x000000       0x137d build/default/production/main.o
+ .debug_info      0x000000       0x122f build/default/production/main.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x14c
+.debug_abbrev     0x000000        0x15d
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x14c build/default/production/main.o
+ .debug_abbrev    0x000000        0x15d build/default/production/main.o
 
-.debug_line       0x000000        0x109
+.debug_line       0x000000         0xfa
  *(.debug_line)
- .debug_line      0x000000        0x109 build/default/production/main.o
+ .debug_line      0x000000         0xfa build/default/production/main.o
 
-.debug_frame      0x000000        0x1c4
+.debug_frame      0x000000        0x198
  *(.debug_frame)
- .debug_frame     0x000000        0x1c4 build/default/production/main.o
+ .debug_frame     0x000000        0x198 build/default/production/main.o
 
-.debug_str        0x000000         0xe1
+.debug_str        0x000000         0x87
  *(.debug_str)
- .debug_str       0x000000         0xe1 build/default/production/main.o
+ .debug_str       0x000000         0x87 build/default/production/main.o
 
 .debug_loc
  *(.debug_loc)
@@ -276,10 +264,10 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xf6
+                  0x000000         0x66
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xf6 build/default/production/main.o
+                  0x000000         0x66 build/default/production/main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -715,7 +703,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30
 LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
-OUTPUT(dist/default/production/loca_system.X.production.elf elf32-pic30)
+OUTPUT(dist/default/production/ping-pong-unit.X.production.elf elf32-pic30)
 LOAD default_isr
 LOAD data_init
 LOAD shared_data_init
@@ -726,28 +714,25 @@ LOAD shared_data_init
                   0x000018        0x186 build/default/production/main.o
 
 __c30_signature
-                  0x00019e         0x18
+                  0x00019e         0x1e
  __c30_signature
                   0x00019e          0x6 build/default/production/main.o
  __c30_signature
-                  0x0001a4          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
+                  0x0001a4          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer1.o)
  __c30_signature
-                  0x0001aa          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x0001aa          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib/dsPIC30F\libp30F1010-elf.a(CloseTimer2.o)
  __c30_signature
-                  0x0001b0          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x0001b0          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x0001b6          0x6 c:/program files (x86)/microchip/xc16/v1.26/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
-.nbss               0x0800          0xe
- .nbss              0x0800          0xe build/default/production/main.o
-                    0x0800                  _send_ping
-                    0x0801                  _ping_send
-                    0x0802                  _blocking_sensors
-                    0x0803                  _listening
-                    0x0804                  _timer1_counter
-                    0x0806                  _timer2_counter
-                    0x0808                  _RTT1
-                    0x080a                  _RTT2
-                    0x080c                  _RTT1_received
-                    0x080d                  _RTT2_received
+.ndata              0x0800          0x2
+ .ndata             0x0800          0x2 build/default/production/main.o
+                    0x0800                  _mode
+
+.nbss               0x0802          0x2
+ .nbss              0x0802          0x2 build/default/production/main.o
+                    0x0802                  _timer1_counter
 
 .config_FCKSM     0xf80008          0x2
  .config_FCKSM    0xf80008          0x2 build/default/production/main.o
@@ -760,26 +745,20 @@ __c30_signature
  .ivt._T1Interrupt
                   0x00001a          0x2 build/default/production/main.o
 
-.ivt._T2Interrupt
-                  0x000020          0x2
- .ivt._T2Interrupt
-                  0x000020          0x2 build/default/production/main.o
-
 .ivt._ADCInterrupt
                   0x00002a          0x2
  .ivt._ADCInterrupt
                   0x00002a          0x2 build/default/production/main.o
 
-.text             0x0001b4        0x1f4
- .text            0x0001b4        0x1f4 build/default/production/main.o
-                  0x000228                  _initADC
-                  0x000274                  _main
-                  0x0002b2                  __T1Interrupt
-                  0x000346                  __T2Interrupt
-                  0x000360                  __ADCInterrupt
+.text             0x0001bc        0x1da
+ .text            0x0001bc        0x1da build/default/production/main.o
+                  0x000224                  _initADC
+                  0x000270                  _main
+                  0x00028a                  __T1Interrupt
+                  0x000314                  __ADCInterrupt
 
-.dinit            0x0003a8          0x8
- .dinit           0x0003a8          0x8 data_init
+.dinit            0x000396         0x10
+ .dinit           0x000396         0x10 data_init
 
-.shared.dinit     0x0003b0          0x2
- .shared.dinit    0x0003b0          0x2 shared_data_init
+.shared.dinit     0x0003a6          0x2
+ .shared.dinit    0x0003a6          0x2 shared_data_init

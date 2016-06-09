@@ -1,5 +1,5 @@
 /*
- *  LOCALIZATION SYSTEM
+ *  SIDE DETECTION 
  * 
  * File:   main.c
  * Author: tom
