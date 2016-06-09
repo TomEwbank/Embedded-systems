@@ -136,7 +136,7 @@ int main(void)
     
     
     /* Enable ADC */
-//    ADCONbits.ADON = 1; /* Start the ADC module*/
+    ADCONbits.ADON = 1; /* Start the ADC module*/
     
     /* Enable Timer 1 */
     T1CONbits.TON = 1;
@@ -168,11 +168,8 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
             stopTimerRTT();
             timer2_counter = 0;
             
-            ADCONbits.ADON = 0; /* Stop the ADC module*/
-//            ADCPC0bits.SWTRG0 = 0;
             IFS0bits.ADIF = 0; 
             ADSTATbits.P0RDY= 0;
-            LATBbits.LATB2 = !LATBbits.LATB2;
                
         } else {
             ++timer1_counter;
@@ -200,9 +197,8 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
         listening = true;
         
         /* Launch ADC */
-        ADCONbits.ADON = 1; /* Start the ADC module*/
         ADCPC0bits.SWTRG0 = 1;
-        LATBbits.LATB2 = !LATBbits.LATB2;     
+     
     } else {
         ++timer1_counter;
     }
@@ -219,6 +215,7 @@ void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void) {
 
 void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 {
+    LATBbits.LATB2 = !LATBbits.LATB2;
     /* AD Conversion complete interrupt handler */
     int sensor1_val, sensor2_val;
     
@@ -246,7 +243,7 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 //        LATBbits.LATB3 = 0;       
 //    }
     
-    LATBbits.LATB2 = !LATBbits.LATB2;
+    
     ADSTATbits.P0RDY= 0; /* Clear the ADSTAT bits*/
     
 }

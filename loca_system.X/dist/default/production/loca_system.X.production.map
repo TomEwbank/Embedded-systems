@@ -62,11 +62,11 @@ Program Memory  [Origin = 0x100, Length = 0xf00]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100                0xb4           0x10e  (270)
-.text                        0x1b4               0x214           0x31e  (798)
-.dinit                       0x3c8                 0x8             0xc  (12)
-.shared.dinit                0x3d0                 0x2             0x3  (3)
+.text                        0x1b4               0x1d6           0x2c1  (705)
+.dinit                       0x38a                 0x8             0xc  (12)
+.shared.dinit                0x392                 0x2             0x3  (3)
 
-                 Total program memory used (bytes):          0x43b  (1083) 18%
+                 Total program memory used (bytes):          0x3de  (990) 17%
 
 
 Ivt Memory  [Origin = 0x4, Length = 0x7c]
@@ -132,17 +132,17 @@ External Symbols in Program Memory (by address):
                   0x0001a8                  __DefaultInterrupt
                   0x0001ac                  _CloseTimer2
                   0x000218                  _main
-                  0x000274                  __T1Interrupt
-                  0x000344                  __T2Interrupt
-                  0x00035e                  __ADCInterrupt
+                  0x000276                  __T1Interrupt
+                  0x000306                  __T2Interrupt
+                  0x000320                  __ADCInterrupt
 
 External Symbols in Program Memory (by name):
 
                   0x0001ac                  _CloseTimer2
-                  0x00035e                  __ADCInterrupt
+                  0x000320                  __ADCInterrupt
                   0x0001a8                  __DefaultInterrupt
-                  0x000274                  __T1Interrupt
-                  0x000344                  __T2Interrupt
+                  0x000276                  __T1Interrupt
+                  0x000306                  __T2Interrupt
                   0x00013c                  __data_init
                   0x00013c                  __data_init_standard
                   0x00012c                  __psv_init
@@ -255,9 +255,9 @@ userdata
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x139 build/default/production/main.o
 
-.debug_line       0x000000        0x103
+.debug_line       0x000000         0xfe
  *(.debug_line)
- .debug_line      0x000000        0x103 build/default/production/main.o
+ .debug_line      0x000000         0xfe build/default/production/main.o
 
 .debug_frame      0x000000        0x178
  *(.debug_frame)
@@ -768,15 +768,15 @@ __c30_signature
  .ivt._ADCInterrupt
                   0x00002a          0x2 build/default/production/main.o
 
-.text             0x0001b4        0x214
- .text            0x0001b4        0x214 build/default/production/main.o
+.text             0x0001b4        0x1d6
+ .text            0x0001b4        0x1d6 build/default/production/main.o
                   0x000218                  _main
-                  0x000274                  __T1Interrupt
-                  0x000344                  __T2Interrupt
-                  0x00035e                  __ADCInterrupt
+                  0x000276                  __T1Interrupt
+                  0x000306                  __T2Interrupt
+                  0x000320                  __ADCInterrupt
 
-.dinit            0x0003c8          0x8
- .dinit           0x0003c8          0x8 data_init
+.dinit            0x00038a          0x8
+ .dinit           0x00038a          0x8 data_init
 
-.shared.dinit     0x0003d0          0x2
- .shared.dinit    0x0003d0          0x2 shared_data_init
+.shared.dinit     0x000392          0x2
+ .shared.dinit    0x000392          0x2 shared_data_init
