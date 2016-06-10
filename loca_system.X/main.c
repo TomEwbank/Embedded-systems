@@ -36,14 +36,14 @@ volatile bool ping_send = false;
 volatile bool blocking_sensors = false;
 volatile bool listening = false;
 
-volatile int timer1_counter = 0;
-volatile int timer2_counter = 0;
+volatile unsigned int timer1_counter = 0;
+volatile unsigned int timer2_counter = 0;
 
-volatile int RTT1_time = 0;
-volatile int RTT2_time = 0;
+volatile unsigned int RTT1_time = 0;
+volatile unsigned int RTT2_time = 0;
 
-volatile int RTT1_overflows = 0;
-volatile int RTT2_overflows = 0;
+volatile unsigned int RTT1_overflows = 0;
+volatile unsigned int RTT2_overflows = 0;
 
 volatile bool RTT1_received = false;
 volatile bool RTT2_received = false;
@@ -153,7 +153,7 @@ int main(void)
     /* Enable Timer 1 */
     T1CONbits.TON = 1;
     
-    int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
+    unsigned int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
 
     while(1) {
 //        LATBbits.LATB2 = RTT1_received;
@@ -168,16 +168,16 @@ int main(void)
         
         if (fetched_RTT1_time) {
             //LATBbits.LATB3 = !LATBbits.LATB3;
-            //int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
-            //int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
+            unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
+            unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
             //send_debug("RTT1:");
             send_coord(fetched_RTT1_overflows, 1);
             send_coord(fetched_RTT1_time, 2);
-            //send_coord(RTT1, 3);
+            send_coord(RTT1, 3);
             //send_debug("RTT2:");
             send_coord(fetched_RTT2_overflows, 4);
             send_coord(fetched_RTT2_time, 5);
-            //send_coord(RTT2, 6);
+            send_coord(RTT2, 6);
         }
     }
 }
@@ -257,7 +257,7 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 {
  
     /* AD Conversion complete interrupt handler */
-    int sensor1_val, sensor2_val, time, overflows;
+    unsigned int sensor1_val, sensor2_val, time, overflows;
     
     IFS0bits.ADIF = 0; /* Clear ADC Interrupt Flag*/
     
