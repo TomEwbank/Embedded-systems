@@ -157,6 +157,9 @@ int main(void)
     unsigned int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
     unsigned int i = 0;
     Point point;
+    point.x = 0;
+    point.y = 0;
+    point.z = 0;
     
     while(1) {
 //        LATBbits.LATB2 = RTT1_received;
@@ -174,10 +177,15 @@ int main(void)
             //LATBbits.LATB3 = !LATBbits.LATB3;
             unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
             unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
-            if (!track(RTT1, RTT2, &point)) {
+            int error = track(RTT1, RTT2, &point);
+            if (error == 0) {
+                send_debug("RTTs:");
+                send_coord(RTT1, RTT2);
+                send_debug("Point:");
                 send_coord(point.x, point.y);
             } else {
                 send_debug("BUG!");
+                send_coord(error, 1);
             }
 
             i = 0;

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
 
 #include "track.h"
@@ -32,7 +31,7 @@ double root2 (double x);
  */
 int track (const double T1, const double T2, Point* p)
 {
-  const double e = 7.0; /* distance between the captor and the origin in [cm] */
+  const double e = 4.0; /* distance between the captor and the origin in [cm] */
   const double v = 0.0340; /* Velocity of the signal in [cm/(10^-6)s] */
 
   /* Check input */
@@ -41,7 +40,7 @@ int track (const double T1, const double T2, Point* p)
      p->x = 0.0;
      p->y = 0.0;
      p->z = 0.0;
-     return -1;
+     return 1;
   }
 
   double d1 = T1 * v;
@@ -57,7 +56,7 @@ int track (const double T1, const double T2, Point* p)
         p->x = 0.0;
         p->y = 0.0;
         p->z = 0.0;
-        return -2;
+        return 2;
      }
 
      return 0;
@@ -77,7 +76,7 @@ int track (const double T1, const double T2, Point* p)
      p->x = 0.0;
      p->y = 0.0;
      p->z = 0.0;
-     return -3;
+     return 3;
   }
 
   p->x = (-b + root2(delta)) / (2.0 * a);
@@ -89,7 +88,7 @@ int track (const double T1, const double T2, Point* p)
      p->x = 0.0;
      p->y = 0.0;
      p->z = 0.0;
-     return -4;
+     return 4;
   }
 
   p->y = root2(tmp);
@@ -99,7 +98,7 @@ int track (const double T1, const double T2, Point* p)
      p->x = 0.0;
      p->y = 0.0;
      p->z = 0.0;
-     return -2;
+     return 2;
   }
 
   return 0;
