@@ -16,6 +16,7 @@
 #include <outcompare.h> //for PWM
 #include <stdbool.h>
 #include "protocol.h"
+#include "track.h"
 
 #pragma config FNOSC = FRC_PLL
 #pragma config FRANGE = FRC_HI_RANGE
@@ -155,6 +156,8 @@ int main(void)
     
     unsigned int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
     unsigned int i = 0;
+    Point point;
+    
     while(1) {
 //        LATBbits.LATB2 = RTT1_received;
 //        LATBbits.LATB3 = RTT2_received;
@@ -166,22 +169,18 @@ int main(void)
         fetched_RTT2_time = RTT2_time;
         IEC0bits.ADIE = 1;
         
-        if (fetched_RTT1_time) {
-            ++i;
-            if (i == 10) {
-                //LATBbits.LATB3 = !LATBbits.LATB3;
-                unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
-                unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
-                //send_debug("RTT1:");
-                // send_coord(fetched_RTT1_overflows, 1);
-                // send_coord(fetched_RTT1_time, 2);
-                send_coord(RTT1, 3);
-                //send_debug("RTT2:");
-                // send_coord(fetched_RTT2_overflows, 4);
-                // send_coord(fetched_RTT2_time, 5);
-                send_coord(RTT2, 6);
-                i = 0;
+        ++i;
+        if (i == 100) { 
+            //LATBbits.LATB3 = !LATBbits.LATB3;
+            unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
+            unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
+            if (!track(RTT1, RTT2, &point)) {
+                send_coord(point.x, point.y);
+            } else {
+                send_debug("BUG!");
             }
+
+            i = 0;
         }
     }
 }
