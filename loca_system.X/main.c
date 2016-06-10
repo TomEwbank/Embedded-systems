@@ -154,7 +154,7 @@ int main(void)
     T1CONbits.TON = 1;
     
     unsigned int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
-
+    unsigned int i = 0;
     while(1) {
 //        LATBbits.LATB2 = RTT1_received;
 //        LATBbits.LATB3 = RTT2_received;
@@ -167,17 +167,21 @@ int main(void)
         IEC0bits.ADIE = 1;
         
         if (fetched_RTT1_time) {
-            //LATBbits.LATB3 = !LATBbits.LATB3;
-            unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
-            unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
-            //send_debug("RTT1:");
-            send_coord(fetched_RTT1_overflows, 1);
-            send_coord(fetched_RTT1_time, 2);
-            send_coord(RTT1, 3);
-            //send_debug("RTT2:");
-            send_coord(fetched_RTT2_overflows, 4);
-            send_coord(fetched_RTT2_time, 5);
-            send_coord(RTT2, 6);
+            ++i;
+            if (i == 10) {
+                //LATBbits.LATB3 = !LATBbits.LATB3;
+                unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
+                unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
+                //send_debug("RTT1:");
+                // send_coord(fetched_RTT1_overflows, 1);
+                // send_coord(fetched_RTT1_time, 2);
+                send_coord(RTT1, 3);
+                //send_debug("RTT2:");
+                // send_coord(fetched_RTT2_overflows, 4);
+                // send_coord(fetched_RTT2_time, 5);
+                send_coord(RTT2, 6);
+                i = 0;
+            }
         }
     }
 }
