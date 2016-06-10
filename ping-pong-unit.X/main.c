@@ -19,8 +19,8 @@
 #pragma config FNOSC = FRC_PLL
 #pragma config FRANGE = FRC_HI_RANGE
 
-#define PING_RECEIVED_LOW 413
-#define PING_RECEIVED_HIGH 571
+#define PING_RECEIVED_LOW 478
+#define PING_RECEIVED_HIGH 542
 #define PWM_PERIOD 0x1FE
 #define TIMER1_PERIOD 20000 // 1ms timer
 
@@ -118,7 +118,7 @@ int main(void)
     initTimer2();
     initADC();
     initTimer1(); 
-    initLedOutputs();
+//    initLedOutputs();
       
     /* Enable ADC */
     ADCONbits.ADON = 1; /* Start the ADC module*/
@@ -141,7 +141,7 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
     switch(mode) {
         case MODE_WAITING_BEFORE_SEND:
             if (timer1_counter >= MODE_WAIT1_DURATION) {
-                LATBbits.LATB3 = !LATBbits.LATB3;
+//                LATBbits.LATB3 = !LATBbits.LATB3;
                 mode = MODE_SENDING;
                 startPWM();
             }
@@ -179,14 +179,14 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
     
     
     
-    LATBbits.LATB2 = !LATBbits.LATB2;
+//    LATBbits.LATB2 = !LATBbits.LATB2;
     
     if (sensor1_val < PING_RECEIVED_LOW || sensor1_val > PING_RECEIVED_HIGH) {
 
         mode = MODE_WAITING_BEFORE_SEND;
         timer1_counter = 0;
         startTimer1();
-        LATBbits.LATB3 = !LATBbits.LATB3;
+//        LATBbits.LATB3 = !LATBbits.LATB3;
     } 
     else {
         /* Keep sampling */

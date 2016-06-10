@@ -30,7 +30,7 @@ int main(void)
     ADCONbits.EIE = 0; /* No Early Interrupt*/
     ADCONbits.ORDER = 0; /* Even channel first*/
     ADCONbits.SEQSAMP = 0; /* Sequential Sampling Enabled*/
-    ADCONbits.ADCS = 0b010; /* Clock Divider is set up for Fadc/14*/
+    ADCONbits.ADCS = 0b010; /* Clock Divider is set up for Fadc/8*/
     ADPCFG = 0xFFFC; /* AN0 and AN1 are analog inputs.*/
     ADSTAT = 0; /* Clear the ADSTAT register*/
     ADCPC0bits.TRGSRC0 = 1; /* Trigger conversion on Timer 1 Period Match*/
@@ -65,7 +65,7 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
     //channel0Result = ADCBUF0; /* Get the conversion result*/
     //channel1Result = ADCBUF1;
     ADCPC0bits.SWTRG0 = 1;
-    LATBbits.LATB3 = !LATBbits.LATB3;
+    LATBbits.LATB2 = !LATBbits.LATB2;
     ADSTATbits.P0RDY= 0; /* Clear the ADSTAT bits*/
     
 }

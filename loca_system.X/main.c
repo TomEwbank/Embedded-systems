@@ -15,6 +15,7 @@
 #include <timer.h>
 #include <outcompare.h> //for PWM
 #include <stdbool.h>
+#include "protocol.h"
 
 #pragma config FNOSC = FRC_PLL
 #pragma config FRANGE = FRC_HI_RANGE
@@ -38,8 +39,11 @@ volatile bool listening = false;
 volatile int timer1_counter = 0;
 volatile int timer2_counter = 0;
 
-volatile int RTT1 = 0;
-volatile int RTT2 = 0;
+volatile int RTT1_time = 0;
+volatile int RTT2_time = 0;
+
+volatile int RTT1_overflows = 0;
+volatile int RTT2_overflows = 0;
 
 volatile bool RTT1_received = false;
 volatile bool RTT2_received = false;
@@ -136,6 +140,7 @@ int main(void)
     initADC();
     initTimer1(); 
     initLedOutputs();
+    initUART();
     
     
     /* starting state */
@@ -146,11 +151,36 @@ int main(void)
     ADCONbits.ADON = 1; /* Start the ADC module*/
     
     /* Enable Timer 1 */
-    T1CONbits.TON = 1;  
+    T1CONbits.TON = 1;
+    
+    int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
 
     while(1) {
-        LATBbits.LATB2 = RTT1_received;
-        LATBbits.LATB3 = RTT2_received;
+//        LATBbits.LATB2 = RTT1_received;
+//        LATBbits.LATB3 = RTT2_received;
+        IEC0bits.ADIE = 0;
+        fetched_RTT1_overflows = RTT1_overflows;
+        fetched_RTT2_overflows = RTT2_overflows;
+        fetched_RTT1_time = RTT1_time;
+        fetched_RTT2_time = RTT2_time;
+        IEC0bits.ADIE = 1;
+        
+        
+//        int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
+//        int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
+        
+        if (RTT1_received && RTT2_received) {
+        send_debug("RTT1:");
+        send_coord(fetched_RTT1_overflows, 1);
+        send_coord(fetched_RTT1_time, 2);
+//        send_coord(RTT1, 3);
+        send_debug("RTT2:");
+        send_coord(fetched_RTT2_overflows, 1);
+        send_coord(fetched_RTT2_time, 2);
+//        send_coord(RTT2, 3);
+        }
+        
+        
     }
 }
 
@@ -160,7 +190,9 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
       
     if (listening) {
         
-        if (timer1_counter == 30) {
+        if (timer1_counter == 50) {
+            
+//            LATBbits.LATB2 = !LATBbits.LATB2;
             timer1_counter = 0;
             listening = false;
             send_ping = true;
@@ -168,14 +200,23 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
             RTT1_received = false;
             RTT2_received = false;
             
+            RTT1_overflows = 0;
+            RTT2_overflows = 0;
+            RTT1_time = 0;
+            RTT2_time = 0;
+            
+//            LATBbits.LATB2 = 0;
+//            LATBbits.LATB3 = 0;
+            
             stopTimerRTT();
             timer2_counter = 0;
             
-            IEC0bits.ADIE = 0;
+//            IEC0bits.ADIE = 0;
             IFS0bits.ADIF = 0; 
             ADSTATbits.P0RDY= 0;
                
         } else {
+            
             ++timer1_counter;
         }
         
@@ -200,8 +241,10 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
         blocking_sensors = false;
         listening = true;
         
+        
+        
         /* Launch ADC */
-        IEC0bits.ADIE = 1;
+//        IEC0bits.ADIE = 1;
         ADCPC0bits.SWTRG0 = 1;
      
     } else {
@@ -223,33 +266,42 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 {
  
     /* AD Conversion complete interrupt handler */
-    int sensor1_val, sensor2_val;
+    int sensor1_val, sensor2_val; 
+    int time, overflows;
     
     IFS0bits.ADIF = 0; /* Clear ADC Interrupt Flag*/
     
+    time = TMR2;
+    overflows = timer2_counter;
     sensor1_val = ADCBUF0; /* Get the conversion result*/
     sensor2_val = ADCBUF1;
+     
+    ADSTATbits.P0RDY = 0; /* Clear the ADSTAT bits*/
+    ADCPC0bits.SWTRG0 = (!RTT1_received || !RTT2_received);// ? 1 : 0;
     
-    ADCPC0bits.SWTRG0 = 1;
+    LATBbits.LATB2 = !LATBbits.LATB2;
     
-//    LATBbits.LATB2 = !LATBbits.LATB2;
-    
-    if (sensor1_val < PING_RECEIVED_LOW || sensor1_val > PING_RECEIVED_HIGH) {
+    if (!RTT1_received && (sensor1_val < PING_RECEIVED_LOW || sensor1_val > PING_RECEIVED_HIGH)) {
 //        LATBbits.LATB2 = 1;
+        RTT1_overflows = overflows;
+        RTT1_time = time;
         RTT1_received = true;
+        
     } 
 //    else {
-//        LATBbits.LATB2 = 0;
+//        LATBbits.LATB2 = !LATBbits.LATB2;
 //    }
-    if (sensor2_val < PING_RECEIVED_LOW || sensor2_val > PING_RECEIVED_HIGH) {
+    if (!RTT2_received && (sensor2_val < PING_RECEIVED_LOW || sensor2_val > PING_RECEIVED_HIGH)) {
 //        LATBbits.LATB3 = 1;
+        RTT2_overflows = overflows;
+        RTT2_time = time;
         RTT2_received = true;
     } 
 //    else {
-//        LATBbits.LATB3 = 0;       
+//        LATBbits.LATB3 = !LATBbits.LATB3;       
 //    }
     
     
-    ADSTATbits.P0RDY= 0; /* Clear the ADSTAT bits*/
+   
     
 }
