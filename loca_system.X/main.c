@@ -158,6 +158,7 @@ int main(void)
     while(1) {
 //        LATBbits.LATB2 = RTT1_received;
 //        LATBbits.LATB3 = RTT2_received;
+        
         IEC0bits.ADIE = 0;
         fetched_RTT1_overflows = RTT1_overflows;
         fetched_RTT2_overflows = RTT2_overflows;
@@ -165,22 +166,19 @@ int main(void)
         fetched_RTT2_time = RTT2_time;
         IEC0bits.ADIE = 1;
         
-        
-//        int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
-//        int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
-        
-        if (RTT1_received && RTT2_received) {
-        send_debug("RTT1:");
-        send_coord(fetched_RTT1_overflows, 1);
-        send_coord(fetched_RTT1_time, 2);
-//        send_coord(RTT1, 3);
-        send_debug("RTT2:");
-        send_coord(fetched_RTT2_overflows, 1);
-        send_coord(fetched_RTT2_time, 2);
-//        send_coord(RTT2, 3);
+        if (fetched_RTT1_time) {
+            //LATBbits.LATB3 = !LATBbits.LATB3;
+            //int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20);
+            //int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20);
+            //send_debug("RTT1:");
+            send_coord(fetched_RTT1_overflows, 1);
+            send_coord(fetched_RTT1_time, 2);
+            //send_coord(RTT1, 3);
+            //send_debug("RTT2:");
+            send_coord(fetched_RTT2_overflows, 4);
+            send_coord(fetched_RTT2_time, 5);
+            //send_coord(RTT2, 6);
         }
-        
-        
     }
 }
 
@@ -192,7 +190,6 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
         
         if (timer1_counter == 50) {
             
-//            LATBbits.LATB2 = !LATBbits.LATB2;
             timer1_counter = 0;
             listening = false;
             send_ping = true;
@@ -204,9 +201,6 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
             RTT2_overflows = 0;
             RTT1_time = 0;
             RTT2_time = 0;
-            
-//            LATBbits.LATB2 = 0;
-//            LATBbits.LATB3 = 0;
             
             stopTimerRTT();
             timer2_counter = 0;
@@ -250,9 +244,6 @@ void __attribute__((__interrupt__, __auto_psv__)) _T1Interrupt(void) {
     } else {
         ++timer1_counter;
     }
-
-    
-//    LATBbits.LATB2 = !LATBbits.LATB2;
     
 }
 
@@ -266,8 +257,7 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
 {
  
     /* AD Conversion complete interrupt handler */
-    int sensor1_val, sensor2_val; 
-    int time, overflows;
+    int sensor1_val, sensor2_val, time, overflows;
     
     IFS0bits.ADIF = 0; /* Clear ADC Interrupt Flag*/
     
@@ -279,29 +269,19 @@ void __attribute__ ((__interrupt__)) _ADCInterrupt(void)
     ADSTATbits.P0RDY = 0; /* Clear the ADSTAT bits*/
     ADCPC0bits.SWTRG0 = (!RTT1_received || !RTT2_received);// ? 1 : 0;
     
-    LATBbits.LATB2 = !LATBbits.LATB2;
-    
     if (!RTT1_received && (sensor1_val < PING_RECEIVED_LOW || sensor1_val > PING_RECEIVED_HIGH)) {
-//        LATBbits.LATB2 = 1;
+        LATBbits.LATB2 = !LATBbits.LATB2;
         RTT1_overflows = overflows;
         RTT1_time = time;
         RTT1_received = true;
         
     } 
-//    else {
-//        LATBbits.LATB2 = !LATBbits.LATB2;
-//    }
+    
     if (!RTT2_received && (sensor2_val < PING_RECEIVED_LOW || sensor2_val > PING_RECEIVED_HIGH)) {
-//        LATBbits.LATB3 = 1;
+        LATBbits.LATB3 = !LATBbits.LATB3;
         RTT2_overflows = overflows;
         RTT2_time = time;
         RTT2_received = true;
-    } 
-//    else {
-//        LATBbits.LATB3 = !LATBbits.LATB3;       
-//    }
-    
-    
-   
+    }    
     
 }
