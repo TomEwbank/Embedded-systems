@@ -156,6 +156,7 @@ int main(void)
     
     unsigned int fetched_RTT1_overflows, fetched_RTT2_overflows, fetched_RTT1_time, fetched_RTT2_time;
     unsigned int i = 0;
+    unsigned int j = 0;
     Point point;
     point.x = 0;
     point.y = 0;
@@ -173,19 +174,33 @@ int main(void)
         IEC0bits.ADIE = 1;
         
         ++i;
-        if (i == 100) { 
+//        if (i == 65000) {
+//            ++j;
+//            i = 0;
+//        }
+        if (i == 30000) { 
+            
             //LATBbits.LATB3 = !LATBbits.LATB3;
-            unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
-            unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
-            int error = track(RTT1, RTT2, &point);
-            if (error == 0) {
-                send_debug("RTTs:");
-                send_coord(RTT1, RTT2);
-                send_debug("Point:");
-                send_coord(point.x, point.y);
-            } else {
-                send_debug("BUG!");
-                send_coord(error, 1);
+            if (RTT1_received && RTT2_received) {
+                unsigned int RTT1 = fetched_RTT1_overflows*3277 + (fetched_RTT1_time/20) - 16000;
+                unsigned int RTT2 = fetched_RTT2_overflows*3277 + (fetched_RTT2_time/20) - 16000;
+                int error = track(RTT1, RTT2, &point);
+                if (error == 0) {
+//                    send_debug("RTTs:");
+//                    send_coord(RTT1, RTT2);
+//                    send_debug("Point:");
+                    int x = (int) point.x;
+                    int y = (int) point.y;
+                    send_coord(x, y);
+//                    if (point.x < 0) {
+////                        send_debug("X NEGATIF");
+//                      
+//                    }
+//                    send_coord(-1,-1);
+                } else {
+//                    send_debug("BUG!");
+//                    send_coord(error, 1);
+                }
             }
 
             i = 0;
