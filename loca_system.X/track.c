@@ -31,7 +31,7 @@ double root2 (double x);
  */
 int track (const double T1, const double T2, Point* p)
 {
-  const double e = 5.2; /* distance between the captor and the origin in [cm] */
+  const double e = 5.35; /* distance between the captor and the origin in [cm] */
   const double v = 0.0340; /* Velocity of the signal in [cm/(10^-6)s] */
 
   /* Check input */

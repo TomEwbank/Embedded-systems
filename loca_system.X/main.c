@@ -178,7 +178,7 @@ int main(void)
 //            ++j;
 //            i = 0;
 //        }
-        if (i == 30000) { 
+        if (i == 5000) { 
             
             //LATBbits.LATB3 = !LATBbits.LATB3;
             if (RTT1_received && RTT2_received) {
